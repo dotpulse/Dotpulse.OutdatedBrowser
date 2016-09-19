@@ -1,4 +1,4 @@
-Dotpulse.outdatedbrowser
+Dotpulse.OutdatedBrowser
 ========================
 
 [![Latest Stable Version](https://poser.pugx.org/dotpulse/outdatedbrowser/v/stable)](https://packagist.org/packages/dotpulse/outdatedbrowser)
