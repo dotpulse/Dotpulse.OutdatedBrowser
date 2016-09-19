@@ -1,0 +1,23 @@
+{
+  "name": "NeosOutdatedBrowser",
+  "description": "OutdatedBrowser.com for Neos.io",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dotpulse/NeosOutdatedBrowser.git"
+  },
+  "devDependencies": {
+    "cssnano-cli": "latest",
+    "node-sass": "latest",
+    "pretty-banner": "latest",
+    "uglifyify": "latest"
+  },
+  "scripts": {
+    "banner:js": "node Banner > Banner.txt && cat Banner.txt Resources/Public/Main.js > Main.js && rm Banner.txt && mv Main.js Resources/Public/Main.js",
+    "banner:css": "node Banner > Banner.txt && cat Banner.txt Resources/Public/Main.css > Main.css && rm Banner.txt && mv Main.css Resources/Public/Main.css",
+    "build:rawjs": "cp Resources/Private/Javascripts/OutdatedBrowser.js Resources/Public/Main.js && npm run banner:js",
+    "build:js": "uglifyjs Resources/Private/Javascripts/OutdatedBrowser.js --mangle --compress --output Resources/Public/Main.js && npm run banner:js",
+    "build:css": "node-sass Resources/Private/Styles/OutdatedBrowser.scss Resources/Public/Main.css && cssnano Resources/Public/Main.css Resources/Public/Main.css --autoprefixer.add true --autoprefixer.browsers: '> 1%' --no-zindex --discardComments.removeAll true && npm run banner:css",
+    "build": "npm run build:css && npm run build:js",
+    "start": "npm run build"
+  }
+}

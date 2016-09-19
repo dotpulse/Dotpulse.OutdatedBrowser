@@ -1,0 +1,16 @@
+TYPO3:
+  Neos:
+    typoScript:
+      autoInclude:
+        'Dotpulse.OutdatedBrowser': TRUE
+
+
+Dotpulse:
+  OutdatedBrowser:
+    includeJavascript: TRUE
+    includeJavascriptCall: TRUE
+    includeCSS: TRUE
+    includeHTML: TRUE
+    fallbackLanguage: en
+    lowerThan: flex-wrap # IE8, IE9, IE10, IE11, A23 or any css property
+    target: _blank

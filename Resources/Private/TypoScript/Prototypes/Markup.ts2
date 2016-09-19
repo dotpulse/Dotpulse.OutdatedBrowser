@@ -1,0 +1,60 @@
+prototype(Dotpulse.OutdatedBrowser:Markup) <  prototype(TYPO3.TypoScript:Tag) {
+	@context.settings = ${Configuration.setting('Dotpulse.OutdatedBrowser')}
+	@context.language = TYPO3.TypoScript:Case {
+		hasDimension {
+			condition = ${Configuration.setting('TYPO3.TYPO3CR.contentDimensions.language') != null}
+			renderer = ${String.crop(documentNode.context.dimensions.language[0], 2)}
+		}
+		hasDefaultLocale {
+			condition = ${String.crop(Configuration.setting('TYPO3.Flow.i18n.defaultLocale'), 2)}
+			renderer = ${String.crop(Configuration.setting('TYPO3.Flow.i18n.defaultLocale'), 2)}
+		}
+		fallbackLanguage {
+			condition = ${settings.fallbackLanguage}
+			renderer = ${settings.fallbackLanguage}
+		}
+		default {
+			condition = true
+			renderer = 'en'
+		}
+	}
+
+	tagName = 'div'
+	attributes = TYPO3.TypoScript:Attributes {
+		id = 'outdated'
+		data-lowerthan = TYPO3.TypoScript:Case {
+			ie8 {
+				condition = ${settings.lowerThan == 'IE8'}
+				renderer ='borderSpacing'
+			}
+			ie9 {
+				condition = ${settings.lowerThan == 'IE9'}
+				renderer ='boxShadow'
+			}
+			ie10 {
+				condition = ${settings.lowerThan == 'IE10'}
+				renderer ='transform'
+			}
+			ie11 {
+				condition = ${settings.lowerThan == 'IE11'}
+				renderer ='borderImage'
+			}
+			ie10 {
+				condition = ${settings.lowerThan == 'A23'}
+				renderer ='writing-mode'
+			}
+			cssProperty {
+				condition = true
+				renderer = ${settings.lowerThan}
+			}
+		}
+	}
+
+	content = TYPO3.TypoScript:Template {
+		templatePath = ${'resource://Dotpulse.OutdatedBrowser/Private/Templates/' + language + '.html'}
+		// Change target
+		@process.target = ${settings.target ? String.replace(value, 'id="btnUpdateBrowser"', 'id="btnUpdateBrowser" target="' + settings.target + '"') : value}
+	}
+
+	@if.includeHTML = ${settings.includeHTML}
+}

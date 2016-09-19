@@ -1,0 +1,90 @@
+// scss-lint:disable Comment IdSelector SelectorFormat ImportantRule
+/*!--------------------------------------------------------------------
+STYLES "Outdated Browser"
+Version:    1.1.3 - 2016
+author:     Burocratik
+website:    http://www.burocratik.com
+* @preserve
+-----------------------------------------------------------------------*/
+
+$outdated-browser-zIndex: 9999 !default;
+$outdated-browser-backgroundColor: #f25648 !default;
+$outdated-browser-color: #fff !default;
+$outdated-browser-height: 170px !default;
+$outdated-browser-fontSize-headline: 22px !default;
+$outdated-browser-fontSize-paragraph: 12px !default;
+$outdated-browser-fontSize-close: 36px !default;
+
+#outdated {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: $outdated-browser-height;
+	text-align: center;
+	text-transform: uppercase;
+	z-index: $outdated-browser-zIndex;
+	background-color: $outdated-browser-backgroundColor;
+	color: $outdated-browser-color;
+
+	h6 {
+		font-size: $outdated-browser-fontSize-headline;
+		line-height: 1;
+		margin: 1.2em 30px 0.4em;
+		color: $outdated-browser-color;
+	}
+
+	p {
+		font-size: $outdated-browser-fontSize-paragraph;
+		line-height: 1;
+		margin: 0;
+		text-indent: 0;
+		color: $outdated-browser-color;
+	}
+
+	#btnUpdateBrowser {
+		display: block;
+		position: relative;
+		padding: 10px 20px;
+		margin: 30px auto 0;
+		width: 230px; // need for IE
+		color: $outdated-browser-color;
+		text-decoration: none;
+		border: 2px solid $outdated-browser-color;
+		cursor: pointer;
+
+		&:hover {
+			color: $outdated-browser-backgroundColor;
+			background-color: $outdated-browser-color;
+		}
+	}
+
+	.last {
+		position: absolute;
+		top: 10px;
+		right: 25px;
+		width: 20px;
+		height: 20px;
+
+		&[dir='rtl'] {
+			right: auto !important;
+			left: 25px !important;
+		}
+	}
+
+	#btnCloseUpdateBrowser {
+		display: block;
+		position: relative;
+		width: 100%;
+		height: 100%;
+		text-decoration: none;
+		color: $outdated-browser-color;
+		font-size: $outdated-browser-fontSize-close;
+		line-height: $outdated-browser-fontSize-close;
+	}
+
+	* html & {
+		position: absolute;
+	}
+}
