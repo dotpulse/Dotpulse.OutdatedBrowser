@@ -1,6 +1,6 @@
-prototype(Dotpulse.OutdatedBrowser:Markup) <  prototype(TYPO3.TypoScript:Tag) {
+prototype(OB:Markup) <  prototype(Fusion:Tag) {
 	@context.settings = ${Configuration.setting('Dotpulse.OutdatedBrowser')}
-	@context.language = TYPO3.TypoScript:Case {
+	@context.language = Fusion:Case {
 		hasDimension {
 			condition = ${Configuration.setting('TYPO3.TYPO3CR.contentDimensions.language') != null}
 			renderer = ${String.crop(documentNode.context.dimensions.language[0], 2)}
@@ -20,9 +20,9 @@ prototype(Dotpulse.OutdatedBrowser:Markup) <  prototype(TYPO3.TypoScript:Tag) {
 	}
 
 	tagName = 'div'
-	attributes = TYPO3.TypoScript:Attributes {
+	attributes = Fusion:Attributes {
 		id = 'outdated'
-		data-lowerthan = TYPO3.TypoScript:Case {
+		data-lowerthan = Fusion:Case {
 			ie8 {
 				condition = ${settings.lowerThan == 'IE8'}
 				renderer ='borderSpacing'
@@ -50,7 +50,7 @@ prototype(Dotpulse.OutdatedBrowser:Markup) <  prototype(TYPO3.TypoScript:Tag) {
 		}
 	}
 
-	content = TYPO3.TypoScript:Template {
+	content = Fusion:Template {
 		templatePath = ${'resource://Dotpulse.OutdatedBrowser/Private/Templates/' + language + '.html'}
 		// Change target
 		@process.target = ${settings.target ? String.replace(value, 'id="btnUpdateBrowser"', 'id="btnUpdateBrowser" target="' + settings.target + '"') : value}

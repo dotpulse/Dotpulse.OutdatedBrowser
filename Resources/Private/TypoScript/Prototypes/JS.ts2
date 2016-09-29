@@ -1,7 +1,7 @@
-prototype(Dotpulse.OutdatedBrowser:Javascript) <  prototype(TYPO3.TypoScript:Tag) {
+prototype(OB:Javascript) <  prototype(Fusion:Tag) {
 	@context.settings = ${Configuration.setting('Dotpulse.OutdatedBrowser')}
 	tagName = 'script'
-	attributes.src = TYPO3.TypoScript:ResourceUri {
+	attributes.src = Fusion:ResourceUri {
 		path = 'resource://Dotpulse.OutdatedBrowser/Public/Main.js'
 	}
 	@if.includeJavascript = ${settings.includeJavascript}

@@ -1,7 +1,7 @@
-prototype(Page).body.javascripts.outdatedBrowser = TYPO3.TypoScript:Array {
-	Markup = Dotpulse.OutdatedBrowser:Markup
-	CSS = Dotpulse.OutdatedBrowser:CSS
-	Javascript = Dotpulse.OutdatedBrowser:Javascript
+prototype(Page).body.javascripts.outdatedBrowser = Fusion:Array {
+	Markup = OB:Markup
+	CSS = OB:CSS
+	Javascript = OB:Javascript
 	@position = 'start 1'
 	@if.isLive = ${node.context.live}
 }

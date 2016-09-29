@@ -1,9 +1,9 @@
-prototype(Dotpulse.OutdatedBrowser:CSS) <  prototype(TYPO3.TypoScript:Tag) {
+prototype(OB:CSS) <  prototype(Fusion:Tag) {
 	@context.settings = ${Configuration.setting('Dotpulse.OutdatedBrowser')}
 	tagName = 'link'
 	attributes {
 		rel = 'stylesheet'
-		href = TYPO3.TypoScript:ResourceUri {
+		href = Fusion:ResourceUri {
 			path = 'resource://Dotpulse.OutdatedBrowser/Public/Main.css'
 		}
 	}
