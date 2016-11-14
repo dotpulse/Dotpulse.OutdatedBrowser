@@ -71,7 +71,7 @@ prototype(OB:Markup) <  prototype(Fusion:Tag) {
 				condition = ${settings.lowerThan == 'IE11'}
 				renderer ='borderImage'
 			}
-			ie10 {
+			a23 {
 				condition = ${settings.lowerThan == 'A23'}
 				renderer ='writing-mode'
 			}

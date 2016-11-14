@@ -13,6 +13,7 @@
     "uglifyjs": "latest"
   },
   "scripts": {
+    "install": "npm run build",
     "banner:js": "node Banner > Banner.txt && cat Banner.txt Resources/Public/Main.js > Main.js && rm Banner.txt && mv Main.js Resources/Public/Main.js",
     "banner:css": "node Banner > Banner.txt && cat Banner.txt Resources/Public/Main.css > Main.css && rm Banner.txt && mv Main.css Resources/Public/Main.css",
     "build:rawjs": "cp Resources/Private/Javascripts/OutdatedBrowser.js Resources/Public/Main.js && npm run banner:js",
