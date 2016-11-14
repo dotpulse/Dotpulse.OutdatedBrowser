@@ -1,7 +1,7 @@
 {
     "name": "dotpulse/outdatedbrowser",
     "type": "typo3-flow-plugin",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "license": "MIT",
     "description": "Outdated Browser for Neos CMS",
     "foundation": {
