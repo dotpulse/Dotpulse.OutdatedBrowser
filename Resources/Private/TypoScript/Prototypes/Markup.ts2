@@ -2,11 +2,11 @@ prototype(OB:Markup) <  prototype(Fusion:Tag) {
 
 	language = Fusion:Case {
 		@context {
-			availableLanguages = ${['cs','da','de','el','en','es-pe','es','et','fa','fi','fr','hu','id','it','ja','ko','lt','nb','nl','pl','pt-br','pt','ro','ru','sl','sv','tr','uk','zh-cn','zh-tw']}
+			availableLanguages = ${['cs','da','de','el','en','es-pe','es','et','fa','fi','fr','hr','hu','id','it','ja','ko','lt','nb','nl','pl','pt-br','pt','ro','ru','sk','sl','sv','tr','uk','zh-cn','zh-tw']}
 			documentLanguage = Fusion:Case {
 				hasDimension {
 					condition = ${Configuration.setting('TYPO3.TYPO3CR.contentDimensions.language') != null}
-					renderer = ${String.crop(documentNode.context.dimensions.language[0], 2)}
+					renderer = ${String.replace(documentNode.context.dimensions.language[0], '_', '-')}
 				}
 				hasDefaultLocale {
 					condition = ${String.crop(Configuration.setting('TYPO3.Flow.i18n.defaultLocale'), 2)}

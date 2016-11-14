@@ -9,7 +9,8 @@
     "cssnano-cli": "latest",
     "node-sass": "latest",
     "pretty-banner": "latest",
-    "uglifyify": "latest"
+    "uglifyify": "latest",
+    "uglifyjs": "latest"
   },
   "scripts": {
     "banner:js": "node Banner > Banner.txt && cat Banner.txt Resources/Public/Main.js > Main.js && rm Banner.txt && mv Main.js Resources/Public/Main.js",
