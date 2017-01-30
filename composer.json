@@ -1,7 +1,7 @@
 {
     "name": "dotpulse/outdatedbrowser",
-    "type": "typo3-flow-plugin",
-    "version": "0.1.8",
+    "type": "neos-plugin",
+    "version": "1.0.0",
     "license": "MIT",
     "description": "Outdated Browser for Neos CMS",
     "foundation": {
@@ -12,13 +12,13 @@
     "authors": [
         {
             "name": "Jon Uhlmann",
-            "email": "jon.uhlmann@dotpulse.ch",
+            "email": "me@jonnitto.ch",
             "homepage": "https://twitter.com/jonnitto",
             "role": "Developer"
         }
     ],
     "require": {
-        "typo3/neos": "2.*"
+        "neos/neos": "3.*"
     },
     "autoload": {
         "psr-0": {

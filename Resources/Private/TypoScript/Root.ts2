@@ -1,4 +1,0 @@
-namespace: Fusion = TYPO3.TypoScript
-namespace: OB = Dotpulse.OutdatedBrowser
-
-include: Prototypes/**/*.ts2

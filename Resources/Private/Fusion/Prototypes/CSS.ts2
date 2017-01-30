@@ -1,3 +1,5 @@
+// Namespaces are defined in the Root.fusion file
+
 prototype(OB:CSS) <  prototype(Fusion:Tag) {
 	@context.settings = ${Configuration.setting('Dotpulse.OutdatedBrowser')}
 	tagName = 'link'
