@@ -8,7 +8,11 @@
         "name": "dotpulse AG",
         "url": "http://dotpulse.ch/"
     },
-    "keywords": ["flow", "neos", "Outdated Browser"],
+    "keywords": [
+        "flow",
+        "neos",
+        "Outdated Browser"
+    ],
     "authors": [
         {
             "name": "Jon Uhlmann",
@@ -30,6 +34,9 @@
         "installer-name": "Dotpulse.OutdatedBrowser",
         "neos": {
             "package-key": "Dotpulse.OutdatedBrowser"
-        }
+        },
+        "applied-flow-migrations": [
+            "TYPO3.FLOW3-201201261636"
+        ]
     }
 }
