@@ -36,7 +36,8 @@
             "package-key": "Dotpulse.OutdatedBrowser"
         },
         "applied-flow-migrations": [
-            "TYPO3.FLOW3-201201261636"
+            "TYPO3.FLOW3-201201261636",
+            "TYPO3.Fluid-201205031303"
         ]
     }
 }
