@@ -1,7 +1,7 @@
 {
     "name": "dotpulse/outdatedbrowser",
     "type": "neos-plugin",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "license": "MIT",
     "description": "Outdated Browser for Neos CMS",
     "foundation": {
