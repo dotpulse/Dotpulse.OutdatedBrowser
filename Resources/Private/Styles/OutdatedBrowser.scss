@@ -7,13 +7,13 @@ website:    http://www.burocratik.com
 * @preserve
 -----------------------------------------------------------------------*/
 
-$outdated-browser-zIndex: 9999 !default;
-$outdated-browser-backgroundColor: #f25648 !default;
+$outdated-browser-zindex: 9999 !default;
+$outdated-browser-backgroundcolor: #f25648 !default;
 $outdated-browser-color: #fff !default;
-$outdated-browser-height: 170px !default;
-$outdated-browser-fontSize-headline: 22px !default;
-$outdated-browser-fontSize-paragraph: 12px !default;
-$outdated-browser-fontSize-close: 36px !default;
+$outdated-browser-padding-bottom: 1em !default;
+$outdated-browser-fontsize-headline: 22px !default;
+$outdated-browser-fontsize-paragraph: 12px !default;
+$outdated-browser-fontsize-close: 36px !default;
 
 #outdated {
 	display: none;
@@ -21,22 +21,22 @@ $outdated-browser-fontSize-close: 36px !default;
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: $outdated-browser-height;
 	text-align: center;
 	text-transform: uppercase;
-	z-index: $outdated-browser-zIndex;
-	background-color: $outdated-browser-backgroundColor;
+	z-index: $outdated-browser-zindex;
+	background-color: $outdated-browser-backgroundcolor;
 	color: $outdated-browser-color;
+	padding-bottom: $outdated-browser-padding-bottom;
 
 	h6 {
-		font-size: $outdated-browser-fontSize-headline;
+		font-size: $outdated-browser-fontsize-headline;
 		line-height: 1;
 		margin: 1.2em 30px 0.4em;
 		color: $outdated-browser-color;
 	}
 
 	p {
-		font-size: $outdated-browser-fontSize-paragraph;
+		font-size: $outdated-browser-fontsize-paragraph;
 		line-height: 1;
 		margin: 0 auto;
 		text-indent: 0;
@@ -55,7 +55,7 @@ $outdated-browser-fontSize-close: 36px !default;
 		cursor: pointer;
 
 		&:hover {
-			color: $outdated-browser-backgroundColor;
+			color: $outdated-browser-backgroundcolor;
 			background-color: $outdated-browser-color;
 		}
 	}
@@ -80,8 +80,8 @@ $outdated-browser-fontSize-close: 36px !default;
 		height: 100%;
 		text-decoration: none;
 		color: $outdated-browser-color;
-		font-size: $outdated-browser-fontSize-close;
-		line-height: $outdated-browser-fontSize-close;
+		font-size: $outdated-browser-fontsize-close;
+		line-height: $outdated-browser-fontsize-close;
 	}
 
 	* html & {
