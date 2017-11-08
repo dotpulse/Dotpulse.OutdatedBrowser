@@ -1,14 +1,11 @@
-// Namespaces are defined in the Root.fusion file
-
-prototype(OB:CSS) <  prototype(Fusion:Tag) {
-	@context.settings = ${Configuration.setting('Dotpulse.OutdatedBrowser')}
-	tagName = 'link'
-	attributes {
-		rel = 'stylesheet'
-		href = Fusion:ResourceUri {
-			path = 'resource://Dotpulse.OutdatedBrowser/Public/Main.css'
-		}
-	}
-	@if.includeCSS = ${settings.includeCSS}
-	@position = 'end 5000'
+prototype(Dotpulse.OutdatedBrowser:CSS) <  prototype(Neos.Fusion:Tag) {
+    include = ${Configuration.setting('Dotpulse.OutdatedBrowser.includeCSS')}
+    tagName = 'link'
+    attributes {
+        rel = 'stylesheet'
+        href = Neos.Fusion:ResourceUri {
+            path = 'resource://Dotpulse.OutdatedBrowser/Public/Main.css'
+        }
+    }
+    @if.include = ${this.include}
 }

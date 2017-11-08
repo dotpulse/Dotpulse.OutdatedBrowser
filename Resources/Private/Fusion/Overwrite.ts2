@@ -1,0 +1,8 @@
+prototype(Page).outdatedBrowser = Neos.Fusion:Array {
+    @position = 'before closingBodyTag'
+    @if.isLive = ${node.context.live}
+
+    Markup = Dotpulse.OutdatedBrowser:Markup
+    CSS = Dotpulse.OutdatedBrowser:CSS
+    Javascript = Dotpulse.OutdatedBrowser:Javascript
+}

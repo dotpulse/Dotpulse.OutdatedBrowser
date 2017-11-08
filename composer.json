@@ -1,18 +1,14 @@
 {
     "name": "dotpulse/outdatedbrowser",
     "type": "neos-plugin",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "license": "MIT",
     "description": "Outdated Browser for Neos CMS",
     "foundation": {
         "name": "dotpulse AG",
         "url": "http://dotpulse.ch/"
     },
-    "keywords": [
-        "flow",
-        "neos",
-        "Outdated Browser"
-    ],
+    "keywords": ["flow", "neos", "Outdated Browser"],
     "authors": [
         {
             "name": "Jon Uhlmann",
@@ -28,6 +24,9 @@
         "psr-0": {
             "Dotpulse\\OutdatedBrowser": "Classes"
         }
+    },
+    "archive": {
+        "exclude": [".editorconfig", ".gitignore", ".github", ".gitattributes", "yarn.lock", "package.json", "Banner.js"]
     },
     "extra": {
         "marketplace-account": "neos@dotpulse.ch",

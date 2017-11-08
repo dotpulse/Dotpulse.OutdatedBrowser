@@ -1,94 +1,93 @@
 // Namespaces are defined in the Root.fusion file
 
-prototype(OB:Markup) <  prototype(Fusion:Tag) {
+prototype(Dotpulse.OutdatedBrowser:Markup) <  prototype(Neos.Fusion:Tag) {
+    language = Neos.Fusion:Case {
+        @context {
+            availableLanguages = ${['cs','da','de','el','en','es-pe','es','et','fa','fi','fr','hr','hu','id','it','ja','ko','lt','nb','nl','pl','pt-br','pt','ro','ru','sk','sl','sv','tr','uk','zh-cn','zh-tw']}
+            documentLanguage = Neos.Fusion:Case {
+                hasDimension {
+                    condition = ${Configuration.setting('Neos.ContentRepository.contentDimensions.language') != null}
+                    renderer = ${String.replace(documentNode.context.dimensions.language[0], '_', '-')}
+                }
+                hasDefaultLocale {
+                    condition = ${String.crop(Configuration.setting('Neos.Flow.i18n.defaultLocale'), 2)}
+                    renderer = ${String.crop(Configuration.setting('Neos.Flow.i18n.defaultLocale'), 2)}
+                }
+                fallbackLanguage {
+                    condition = ${settings.fallbackLanguage}
+                    renderer = ${settings.fallbackLanguage}
+                }
+                default {
+                    condition = true
+                    renderer = 'en'
+                }
+            }
+            fallbackLanguage = Neos.Fusion:Case {
+                fallbackLanguage {
+                    condition = ${settings.fallbackLanguage}
+                    renderer = ${settings.fallbackLanguage}
+                }
+                default {
+                    condition = true
+                    renderer = 'en'
+                }
+            }
+        }
+        hasFile {
+            condition = ${Array.indexOf(availableLanguages, documentLanguage) != -1}
+            renderer = ${documentLanguage}
+        }
+        noFile {
+            condition = ${Array.indexOf(availableLanguages, fallbackLanguage) != -1}
+            renderer = ${fallbackLanguage}
+        }
+        fallbackToEn {
+            condition = true
+            renderer = 'en'
+        }
+    }
 
-	language = Fusion:Case {
-		@context {
-			availableLanguages = ${['cs','da','de','el','en','es-pe','es','et','fa','fi','fr','hr','hu','id','it','ja','ko','lt','nb','nl','pl','pt-br','pt','ro','ru','sk','sl','sv','tr','uk','zh-cn','zh-tw']}
-			documentLanguage = Fusion:Case {
-				hasDimension {
-					condition = ${Configuration.setting('Neos.ContentRepository.contentDimensions.language') != null}
-					renderer = ${String.replace(documentNode.context.dimensions.language[0], '_', '-')}
-				}
-				hasDefaultLocale {
-					condition = ${String.crop(Configuration.setting('Neos.Flow.i18n.defaultLocale'), 2)}
-					renderer = ${String.crop(Configuration.setting('Neos.Flow.i18n.defaultLocale'), 2)}
-				}
-				fallbackLanguage {
-					condition = ${settings.fallbackLanguage}
-					renderer = ${settings.fallbackLanguage}
-				}
-				default {
-					condition = true
-					renderer = 'en'
-				}
-			}
-			fallbackLanguage = Fusion:Case {
-				fallbackLanguage {
-					condition = ${settings.fallbackLanguage}
-					renderer = ${settings.fallbackLanguage}
-				}
-				default {
-					condition = true
-					renderer = 'en'
-				}
-			}
-		}
-		hasFile {
-			condition = ${Array.indexOf(availableLanguages, documentLanguage) != -1}
-			renderer = ${documentLanguage}
-		}
-		noFile {
-			condition = ${Array.indexOf(availableLanguages, fallbackLanguage) != -1}
-			renderer = ${fallbackLanguage}
-		}
-		fallbackToEn {
-			condition = true
-			renderer = 'en'
-		}
-	}
+    @context {
+        settings = ${Configuration.setting('Dotpulse.OutdatedBrowser')}
+        language = ${this.language}
+    }
 
-	@context {
-		settings = ${Configuration.setting('Dotpulse.OutdatedBrowser')}
-		language = ${this.language}
-	}
+    tagName = 'div'
+    attributes = Neos.Fusion:Attributes {
+        id = 'outdated'
+        data-lowerthan = Neos.Fusion:Case {
+            ie8 {
+                condition = ${settings.lowerThan == 'IE8'}
+                renderer ='borderSpacing'
+            }
+            ie9 {
+                condition = ${settings.lowerThan == 'IE9'}
+                renderer ='boxShadow'
+            }
+            ie10 {
+                condition = ${settings.lowerThan == 'IE10'}
+                renderer ='transform'
+            }
+            ie11 {
+                condition = ${settings.lowerThan == 'IE11'}
+                renderer ='borderImage'
+            }
+            a23 {
+                condition = ${settings.lowerThan == 'A23'}
+                renderer ='writing-mode'
+            }
+            cssProperty {
+                condition = true
+                renderer = ${settings.lowerThan}
+            }
+        }
+    }
 
-	tagName = 'div'
-	attributes = Fusion:Attributes {
-		id = 'outdated'
-		data-lowerthan = Fusion:Case {
-			ie8 {
-				condition = ${settings.lowerThan == 'IE8'}
-				renderer ='borderSpacing'
-			}
-			ie9 {
-				condition = ${settings.lowerThan == 'IE9'}
-				renderer ='boxShadow'
-			}
-			ie10 {
-				condition = ${settings.lowerThan == 'IE10'}
-				renderer ='transform'
-			}
-			ie11 {
-				condition = ${settings.lowerThan == 'IE11'}
-				renderer ='borderImage'
-			}
-			a23 {
-				condition = ${settings.lowerThan == 'A23'}
-				renderer ='writing-mode'
-			}
-			cssProperty {
-				condition = true
-				renderer = ${settings.lowerThan}
-			}
-		}
-	}
+    content = Neos.Fusion:Template {
+        templatePath = ${'resource://Dotpulse.OutdatedBrowser/Private/Templates/' + language + '.html'}
+        // Change target
+        @process.target = ${settings.target ? String.replace(value, 'id="btnUpdateBrowser"', 'id="btnUpdateBrowser" target="' + settings.target + '"') : value}
+    }
 
-	content = Fusion:Template {
-		templatePath = ${'resource://Dotpulse.OutdatedBrowser/Private/Templates/' + language + '.html'}
-		// Change target
-		@process.target = ${settings.target ? String.replace(value, 'id="btnUpdateBrowser"', 'id="btnUpdateBrowser" target="' + settings.target + '"') : value}
-	}
-
-	@if.includeHTML = ${settings.includeHTML}
+    @if.include = ${settings.includeHTML}
 }

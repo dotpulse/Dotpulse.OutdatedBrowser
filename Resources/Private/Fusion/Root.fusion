@@ -1,4 +1,1 @@
-namespace: Fusion = Neos.Fusion
-namespace: OB = Dotpulse.OutdatedBrowser
-
-include: Prototypes/**/*.fusion
+include: **/*.fusion
