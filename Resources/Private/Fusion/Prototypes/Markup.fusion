@@ -1,5 +1,3 @@
-// Namespaces are defined in the Root.fusion file
-
 prototype(Dotpulse.OutdatedBrowser:Markup) <  prototype(Neos.Fusion:Tag) {
     language = Neos.Fusion:Case {
         @context {
