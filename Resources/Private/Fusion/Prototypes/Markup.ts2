@@ -86,7 +86,7 @@ prototype(Dotpulse.OutdatedBrowser:Markup) <  prototype(Neos.Fusion:Tag) {
     content = Neos.Fusion:Template {
         templatePath = ${'resource://Dotpulse.OutdatedBrowser/Private/Templates/' + language + '.html'}
         // Change target
-        @process.target = ${settings.target ? String.replace(value, 'id="btnUpdateBrowser"', 'id="btnUpdateBrowser" target="' + settings.target + '"') : value}
+        @process.target = ${settings.target ? String.replace(value, 'id="btnUpdateBrowser"', 'id="btnUpdateBrowser" rel="noopener" target="' + settings.target + '"') : value}
     }
 
     @if.include = ${settings.includeHTML}
