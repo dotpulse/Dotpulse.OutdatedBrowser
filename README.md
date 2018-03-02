@@ -33,7 +33,7 @@ You can set the setting `Dotpulse.OutdatedBrowser.lowerThan` to different kind o
 * Browser based
    * `IE8`
    * `IE9`
-   * `IE10
+   * `IE10`
    * `IE11`
    * `Edge`
 * Feature based
