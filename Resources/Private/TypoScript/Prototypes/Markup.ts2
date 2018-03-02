@@ -1,92 +1,111 @@
-prototype(OB:Markup) <  prototype(Fusion:Tag) {
+prototype(Dotpulse.OutdatedBrowser:Markup) <  prototype(TYPO3.TypoScript:Tag) {
+    language = TYPO3.TypoScript:Case {
+        @context {
+            availableLanguages = ${['cs','da','de','el','en','es-pe','es','et','fa','fi','fr','hr','hu','id','it','ja','ko','lt','nb','nl','pl','pt-br','pt','ro','ru','sk','sl','sv','tr','uk','zh-cn','zh-tw']}
+            documentLanguage = TYPO3.TypoScript:Case {
+                hasDimension {
+                    condition = ${Configuration.setting('TYPO3.TYPO3CR.contentDimensions.language') != null}
+                    renderer = ${String.replace(documentNode.context.dimensions.language[0], '_', '-')}
+                }
+                hasDefaultLocale {
+                    condition = ${String.crop(Configuration.setting('TYPO3.Flow.i18n.defaultLocale'), 2)}
+                    renderer = ${String.crop(Configuration.setting('TYPO3.Flow.i18n.defaultLocale'), 2)}
+                }
+                fallbackLanguage {
+                    condition = ${settings.fallbackLanguage}
+                    renderer = ${settings.fallbackLanguage}
+                }
+                default {
+                    condition = true
+                    renderer = 'en'
+                }
+            }
+            fallbackLanguage = TYPO3.TypoScript:Case {
+                fallbackLanguage {
+                    condition = ${settings.fallbackLanguage}
+                    renderer = ${settings.fallbackLanguage}
+                }
+                default {
+                    condition = true
+                    renderer = 'en'
+                }
+            }
+        }
+        hasFile {
+            condition = ${Array.indexOf(availableLanguages, documentLanguage) != -1}
+            renderer = ${documentLanguage}
+        }
+        noFile {
+            condition = ${Array.indexOf(availableLanguages, fallbackLanguage) != -1}
+            renderer = ${fallbackLanguage}
+        }
+        fallbackToEn {
+            condition = true
+            renderer = 'en'
+        }
+    }
 
-	language = Fusion:Case {
-		@context {
-			availableLanguages = ${['cs','da','de','el','en','es-pe','es','et','fa','fi','fr','hr','hu','id','it','ja','ko','lt','nb','nl','pl','pt-br','pt','ro','ru','sk','sl','sv','tr','uk','zh-cn','zh-tw']}
-			documentLanguage = Fusion:Case {
-				hasDimension {
-					condition = ${Configuration.setting('TYPO3.TYPO3CR.contentDimensions.language') != null}
-					renderer = ${String.replace(documentNode.context.dimensions.language[0], '_', '-')}
-				}
-				hasDefaultLocale {
-					condition = ${String.crop(Configuration.setting('TYPO3.Flow.i18n.defaultLocale'), 2)}
-					renderer = ${String.crop(Configuration.setting('TYPO3.Flow.i18n.defaultLocale'), 2)}
-				}
-				fallbackLanguage {
-					condition = ${settings.fallbackLanguage}
-					renderer = ${settings.fallbackLanguage}
-				}
-				default {
-					condition = true
-					renderer = 'en'
-				}
-			}
-			fallbackLanguage = Fusion:Case {
-				fallbackLanguage {
-					condition = ${settings.fallbackLanguage}
-					renderer = ${settings.fallbackLanguage}
-				}
-				default {
-					condition = true
-					renderer = 'en'
-				}
-			}
-		}
-		hasFile {
-			condition = ${Array.indexOf(availableLanguages, documentLanguage) != -1}
-			renderer = ${documentLanguage}
-		}
-		noFile {
-			condition = ${Array.indexOf(availableLanguages, fallbackLanguage) != -1}
-			renderer = ${fallbackLanguage}
-		}
-		fallbackToEn {
-			condition = true
-			renderer = 'en'
-		}
-	}
+    @context {
+        settings = ${Configuration.setting('Dotpulse.OutdatedBrowser')}
+        language = ${this.language}
+    }
 
-	@context {
-		settings = ${Configuration.setting('Dotpulse.OutdatedBrowser')}
-		language = ${this.language}
-	}
+    tagName = 'div'
+    attributes = TYPO3.TypoScript:Attributes {
+        id = 'outdated'
+        data-lowerthan = TYPO3.TypoScript:Case {
+            ie8 {
+                condition = ${settings.lowerThan == 'IE8'}
+                renderer ='borderSpacing'
+            }
+            ie9 {
+                condition = ${settings.lowerThan == 'IE9'}
+                renderer ='boxShadow'
+            }
+            ie10 {
+                condition = ${settings.lowerThan == 'IE10'}
+                renderer ='transform'
+            }
+            ie11 {
+                condition = ${settings.lowerThan == 'IE11'}
+                renderer ='borderImage'
+            }
+            edge {
+                condition = ${settings.lowerThan == 'Edge'}
+                renderer ='js:Promise'
+            }
+            flexbox {
+                condition = ${settings.lowerThan == 'Flexbox'}
+                renderer ='flex-wrap'
+            }
+            oldGrid {
+                condition = ${settings.lowerThan == 'oldGrid'}
+                renderer ='grid-row'
+            }
+            grid {
+                condition = ${settings.lowerThan == 'Grid'}
+                renderer ='grid-auto-flow'
+            }
+            a23 {
+                condition = ${settings.lowerThan == 'A23'}
+                renderer ='writing-mode'
+            }
+            cssProperty {
+                condition = true
+                renderer = ${settings.lowerThan}
+            }
+        }
+    }
 
-	tagName = 'div'
-	attributes = Fusion:Attributes {
-		id = 'outdated'
-		data-lowerthan = Fusion:Case {
-			ie8 {
-				condition = ${settings.lowerThan == 'IE8'}
-				renderer ='borderSpacing'
-			}
-			ie9 {
-				condition = ${settings.lowerThan == 'IE9'}
-				renderer ='boxShadow'
-			}
-			ie10 {
-				condition = ${settings.lowerThan == 'IE10'}
-				renderer ='transform'
-			}
-			ie11 {
-				condition = ${settings.lowerThan == 'IE11'}
-				renderer ='borderImage'
-			}
-			a23 {
-				condition = ${settings.lowerThan == 'A23'}
-				renderer ='writing-mode'
-			}
-			cssProperty {
-				condition = true
-				renderer = ${settings.lowerThan}
-			}
-		}
-	}
+    content = TYPO3.TypoScript:Array {
+        CSS = Dotpulse.OutdatedBrowser:CSS
+        Markup = TYPO3.TypoScript:Template {
+            templatePath = ${'resource://Dotpulse.OutdatedBrowser/Private/Templates/' + language + '.html'}
+            // Change target
+            @process.target = ${settings.target ? String.replace(value, 'id="btnUpdateBrowser"', 'id="btnUpdateBrowser" rel="noopener" target="' + settings.target + '"') : value}
+        }
+        Javascript = Dotpulse.OutdatedBrowser:Javascript
+    }
 
-	content = Fusion:Template {
-		templatePath = ${'resource://Dotpulse.OutdatedBrowser/Private/Templates/' + language + '.html'}
-		// Change target
-		@process.target = ${settings.target ? String.replace(value, 'id="btnUpdateBrowser"', 'id="btnUpdateBrowser" target="' + settings.target + '"') : value}
-	}
-
-	@if.includeHTML = ${settings.includeHTML}
+    @if.include = ${settings.includeHTML}
 }

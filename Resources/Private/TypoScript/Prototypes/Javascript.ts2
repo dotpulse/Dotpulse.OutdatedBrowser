@@ -1,0 +1,11 @@
+prototype(Dotpulse.OutdatedBrowser:Javascript) <  prototype(TYPO3.TypoScript:Tag) {
+    include = ${Configuration.setting('Dotpulse.OutdatedBrowser.includeJavascript')}
+    tagName = 'script'
+    attributes {
+        src = TYPO3.TypoScript:ResourceUri {
+            path = 'resource://Dotpulse.OutdatedBrowser/Public/Main.js'
+        }
+        async = true
+    }
+    @if.include = ${this.include}
+}

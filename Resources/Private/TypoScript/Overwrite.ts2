@@ -1,0 +1,4 @@
+prototype(Page).outdatedBrowser = Dotpulse.OutdatedBrowser:Markup {
+    @position = 'before closingBodyTag'
+    @if.isLive = ${node.context.live}
+}

@@ -2,15 +2,18 @@ TYPO3:
   Neos:
     typoScript:
       autoInclude:
-        'Dotpulse.OutdatedBrowser': TRUE
+        'Dotpulse.OutdatedBrowser': true
 
 
 Dotpulse:
   OutdatedBrowser:
-    includeJavascript: TRUE
-    includeJavascriptCall: TRUE
-    includeCSS: TRUE
-    includeHTML: TRUE
+    includeJavascript: true
+    includeJavascriptCall: true
+    includeCSS: true
+    includeHTML: true
     fallbackLanguage: en
-    lowerThan: flex-wrap # IE8, IE9, IE10, IE11, A23 or any css property
+    # Browser based: IE8, IE9, IE10, IE11 or Edge
+    # Feature based: Flexbox, oldGrid or Grid
+    # Property based: Any CSS property
+    lowerThan: oldGrid
     target: _blank

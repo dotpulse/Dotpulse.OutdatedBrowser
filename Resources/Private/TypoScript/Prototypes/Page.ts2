@@ -1,7 +1,0 @@
-prototype(Page).body.javascripts.outdatedBrowser = Fusion:Array {
-	Markup = OB:Markup
-	CSS = OB:CSS
-	Javascript = OB:Javascript
-	@position = 'start 1'
-	@if.isLive = ${node.context.live}
-}

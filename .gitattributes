@@ -1,0 +1,6 @@
+/.gitattributes export-ignore
+/.gitignore export-ignore
+/.github export-ignore
+/.editorconfig export-ignore
+/Banner.js export-ignore
+/package.json export-ignore
