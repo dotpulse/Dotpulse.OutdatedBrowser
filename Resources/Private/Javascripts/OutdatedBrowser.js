@@ -1,90 +1,78 @@
-/*!--------------------------------------------------------------------
-JAVASCRIPT "Outdated Browser"
-Version:    1.1.3 - 2016
-author:     Burocratik
-website:    http://www.burocratik.com
-* @preserve
------------------------------------------------------------------------*/
+// Based on https://github.com/burocratik/outdated-browser
+
 (function() {
-	var outdated = document.getElementById('outdated');
-	var data = outdated.getAttribute('data-lowerthan');
-	var cssProp = data ? data : 'transform';
-	var hasCookie = false;
-	if (navigator.cookieEnabled) {
-		hasCookie = (function() {
-			var v = document.cookie.match('(^|;) ?outdatedbrowser=([^;]*)(;|$)');
-			return v ? v[2] == 'true' : null;
-		})();
-	}
+    var outdated = document.getElementById("outdated");
+    var data = outdated.getAttribute("data-lowerthan");
+    var cssProp = data ? data : "transform";
+    var validBrowser = false;
+    var hasCookie = false;
+    if (navigator.cookieEnabled) {
+        hasCookie = (function() {
+            var v = document.cookie.match(
+                "(^|;) ?outdatedbrowser=([^;]*)(;|$)"
+            );
+            return v ? v[2] == "true" : null;
+        })();
+    }
 
-	if (!hasCookie) {
-		//Define opacity and fadeIn/fadeOut functions
-		var done = true;
+    if (!hasCookie) {
+        var supports = (function() {
+            var style = document.createElement("div").style;
+            var vendors = ["Moz", "O", "ms", "Webkit", "Khtml"];
+            var length = vendors.length;
 
-		var opacity = function(opacityValue) {
-			outdated.style.opacity = opacityValue / 100;
-			outdated.style.filter = 'alpha(opacity=' + opacityValue + ')';
-		};
+            return function(prop) {
+                if (prop in style) {
+                    return true;
+                }
 
-		var fadeIn = function(opacityValue) {
-			opacity(opacityValue);
-			if (opacityValue == 1) {
-				outdated.style.display = 'block';
-			}
-			if (opacityValue == 100) {
-				done = true;
-			}
-		};
+                prop = prop.replace(/(?:^|-)(\w)/g, function(matches, letter) {
+                    return letter.toUpperCase();
+                });
 
-		var supports = (function() {
-			var div = document.createElement('div');
-			var vendors = 'Khtml Ms O Moz Webkit'.split(' ');
-			var len = vendors.length;
+                while (length--) {
+                    if (vendors[length] + prop in style) {
+                        return true;
+                    }
+                }
+                return false;
+            };
+        })();
 
-			return function(prop) {
-				if (prop in div.style) {
-					return true;
-				}
+        var removeElement = function() {
+            outdated.parentNode.removeChild(outdated);
+        };
 
-				prop = prop.replace(/^[a-z]/, function(val) {
-					return val.toUpperCase();
-				});
+        // browser check by js props
+        if (/^js:+/g.test(cssProp)) {
+            var jsProp = cssProp.split(":")[1];
+            if (jsProp && jsProp == "Promise") {
+                validBrowser =
+                    window.Promise !== undefined &&
+                    window.Promise !== null &&
+                    Object.prototype.toString.call(window.Promise.resolve()) ===
+                        "[object Promise]";
+            }
+        } else {
+            validBrowser = supports("" + cssProp + "");
+        }
 
-				while (len--) {
-					if (vendors[len] + prop in div.style) {
-						return true;
-					}
-				}
-				return false;
-			};
-		})();
+        if (validBrowser) {
+            removeElement();
+        } else {
+            outdated.style.display = "block";
 
-		//if browser does not supports css3 property (transform=default), if does > exit all this
-		if (!supports('' + cssProp + '')) { // jscs:ignore
-			if (done && outdated.style.opacity !== '1') {
-				done = false;
-				for (var i = 1; i <= 100; i++) {
-					// jshint -W083
-					setTimeout((function(x) {
-						return function() {
-							fadeIn(x);
-						};
-					})(i), i * 8);
-					// jshint +W083
-				}
-			}
-		} else {
-			return;
-		}
+            document.getElementById(
+                "btnCloseUpdateBrowser"
+            ).onmousedown = function() {
+                removeElement();
 
-		document.getElementById('btnCloseUpdateBrowser').onmousedown = function() {
-			outdated.style.display = 'none';
+                if (navigator.cookieEnabled) {
+                    document.cookie = "outdatedbrowser=true;path=/;";
+                }
 
-			if (navigator.cookieEnabled) {
-				document.cookie = 'outdatedbrowser=true;path=/;';
-			}
-
-			return false;
-		};
-	}
+                return false;
+            };
+        }
+    }
 })();

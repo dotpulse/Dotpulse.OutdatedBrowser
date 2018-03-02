@@ -1,8 +1,11 @@
 prototype(Dotpulse.OutdatedBrowser:Javascript) <  prototype(Neos.Fusion:Tag) {
     include = ${Configuration.setting('Dotpulse.OutdatedBrowser.includeJavascript')}
     tagName = 'script'
-    attributes.src = Neos.Fusion:ResourceUri {
-        path = 'resource://Dotpulse.OutdatedBrowser/Public/Main.js'
+    attributes {
+        src = Neos.Fusion:ResourceUri {
+            path = 'resource://Dotpulse.OutdatedBrowser/Public/Main.js'
+        }
+        async = true
     }
     @if.include = ${this.include}
 }

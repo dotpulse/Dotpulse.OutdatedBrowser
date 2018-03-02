@@ -1,7 +1,7 @@
 {
     "name": "dotpulse/outdatedbrowser",
     "type": "neos-plugin",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "license": "MIT",
     "description": "Outdated Browser for Neos CMS",
     "foundation": {
@@ -26,7 +26,7 @@
         }
     },
     "archive": {
-        "exclude": [".editorconfig", ".gitignore", ".github", ".gitattributes", "yarn.lock", "package.json", "Banner.js"]
+        "exclude": [".editorconfig", ".gitignore", ".github", ".gitattributes", "package.json", "Banner.js"]
     },
     "extra": {
         "marketplace-account": "neos@dotpulse.ch",
