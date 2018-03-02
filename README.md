@@ -25,6 +25,33 @@ composer require "dotpulse/outdatedbrowser:^0.2" --no-update
 
 The `--no-update` command prevent the automatic update of the dependencies. After the package was added to your theme `composer.json`, go back to the root of the Neos installation and run `composer update`. Et voilà! Your desired package is now installed correctly.
 
+## Configuration
+
+Basicly you need to ajust the setting `Dotpulse.OutdatedBrowser.lowerThan`. The default value is `oldGrid`.
+You can set the setting `Dotpulse.OutdatedBrowser.lowerThan` to different kind of values:
+
+* Browser based
+   * `IE8`
+   * `IE9`
+   * `IE10`
+   * `IE11`
+   * `Edge`
+* Feature based
+   * `Flexbox`
+   * `oldGrid` (The old css grid specification)
+   * `Grid`
+* Property based
+   * Any CSS property, e. g. `transform`
+
+Example: 
+
+```yaml
+Dotpulse:
+  OutdatedBrowser:
+    lowerThan: Grid
+```
+
+
 ## License
 
 Licensed under MIT, see [LICENSE](LICENSE)
