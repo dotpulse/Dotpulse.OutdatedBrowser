@@ -8,17 +8,14 @@
   "devDependencies": {
     "cssnano-cli": "latest",
     "node-sass": "latest",
-    "pretty-banner": "latest",
     "uglifyify": "latest",
-    "uglifyjs": "latest"
+    "uglify-js": "latest"
   },
   "scripts": {
     "install": "brew install brotli zopfli",
-    "banner:js": "node Banner > Banner.txt && cat Banner.txt Resources/Public/Main.js > Main.js && rm Banner.txt && mv Main.js Resources/Public/Main.js",
-    "banner:css": "node Banner > Banner.txt && cat Banner.txt Resources/Public/Main.css > Main.css && rm Banner.txt && mv Main.css Resources/Public/Main.css",
-    "build:rawjs": "cp Resources/Private/Javascripts/OutdatedBrowser.js Resources/Public/Main.js && npm run banner:js",
-    "build:js": "uglifyjs Resources/Private/Javascripts/OutdatedBrowser.js --mangle --compress --output Resources/Public/Main.js && npm run banner:js",
-    "build:css": "node-sass Resources/Private/Styles/OutdatedBrowser.scss Resources/Public/Main.css && cssnano Resources/Public/Main.css Resources/Public/Main.css --autoprefixer.add true --autoprefixer.browsers: '> 1%' --no-zindex --discardComments.removeAll true && npm run banner:css",
+    "build:rawjs": "cp Resources/Private/Javascripts/OutdatedBrowser.js Resources/Public/Main.js",
+    "build:js": "uglifyjs Resources/Private/Javascripts/OutdatedBrowser.js --mangle --compress --output Resources/Public/Main.js",
+    "build:css": "node-sass Resources/Private/Styles/OutdatedBrowser.scss Resources/Public/Main.css && cssnano Resources/Public/Main.css Resources/Public/Main.css --autoprefixer.add true --autoprefixer.browsers: '> 1%' --no-zindex --discardComments.removeAll true",
     "compress:zopfli": "rm Resources/Public/Main.js.gz 2> /dev/null && rm Resources/Public/Main.css.gz 2> /dev/null; zopfli Resources/Public/Main.js && zopfli Resources/Public/Main.css",
     "compress:brotli": "rm Resources/Public/Main.js.br 2> /dev/null && rm Resources/Public/Main.css.br 2> /dev/null; brotli Resources/Public/Main.js && brotli Resources/Public/Main.css",
     "compress": "npm run compress:zopfli && npm run compress:brotli",

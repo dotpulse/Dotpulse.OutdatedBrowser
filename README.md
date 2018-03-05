@@ -33,6 +33,7 @@ Basicly you need to ajust the setting `Dotpulse.OutdatedBrowser.lowerThan`. The 
 You can set the setting `Dotpulse.OutdatedBrowser.lowerThan` to different kind of values:
 
 * Browser based
+   * `A23` (Android 2.3)
    * `IE8`
    * `IE9`
    * `IE10`

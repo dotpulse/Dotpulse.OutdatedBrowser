@@ -7,12 +7,14 @@ Neos:
 
 Dotpulse:
   OutdatedBrowser:
-    includeJavascript: true
-    includeJavascriptCall: true
-    includeCSS: true
-    includeHTML: true
+    javascript:
+      include: true
+      inline: true
+    css:
+      include: true
+      inline: true
     fallbackLanguage: en
-    # Browser based: IE8, IE9, IE10, IE11 or Edge
+    # Browser based: A23, IE8, IE9, IE10, IE11 or Edge
     # Feature based: Flexbox, oldGrid or Grid
     # Property based: Any CSS property
     lowerThan: oldGrid

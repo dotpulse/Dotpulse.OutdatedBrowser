@@ -1,7 +1,6 @@
 {
     "name": "dotpulse/outdatedbrowser",
     "type": "neos-plugin",
-    "version": "1.2.0",
     "license": "MIT",
     "description": "Outdated Browser for Neos CMS",
     "foundation": {
@@ -18,7 +17,8 @@
         }
     ],
     "require": {
-        "neos/neos": "3.*"
+        "neos/neos": "3.*",
+        "carbon/filecontent": "*"
     },
     "autoload": {
         "psr-0": {
@@ -26,7 +26,7 @@
         }
     },
     "archive": {
-        "exclude": [".editorconfig", ".gitignore", ".github", ".gitattributes", "package.json", "Banner.js"]
+        "exclude": [".editorconfig", ".gitignore", ".github", ".gitattributes", "package.json"]
     },
     "extra": {
         "marketplace-account": "neos@dotpulse.ch",

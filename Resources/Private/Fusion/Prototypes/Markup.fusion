@@ -12,8 +12,8 @@ prototype(Dotpulse.OutdatedBrowser:Markup) <  prototype(Neos.Fusion:Tag) {
                     renderer = ${String.crop(Configuration.setting('Neos.Flow.i18n.defaultLocale'), 2)}
                 }
                 fallbackLanguage {
-                    condition = ${settings.fallbackLanguage}
-                    renderer = ${settings.fallbackLanguage}
+                    condition = ${configuration.fallbackLanguage}
+                    renderer = ${configuration.fallbackLanguage}
                 }
                 default {
                     condition = true
@@ -22,8 +22,8 @@ prototype(Dotpulse.OutdatedBrowser:Markup) <  prototype(Neos.Fusion:Tag) {
             }
             fallbackLanguage = Neos.Fusion:Case {
                 fallbackLanguage {
-                    condition = ${settings.fallbackLanguage}
-                    renderer = ${settings.fallbackLanguage}
+                    condition = ${configuration.fallbackLanguage}
+                    renderer = ${configuration.fallbackLanguage}
                 }
                 default {
                     condition = true
@@ -46,66 +46,68 @@ prototype(Dotpulse.OutdatedBrowser:Markup) <  prototype(Neos.Fusion:Tag) {
     }
 
     @context {
-        settings = ${Configuration.setting('Dotpulse.OutdatedBrowser')}
+        configuration = ${Configuration.setting('Dotpulse.OutdatedBrowser')}
         language = ${this.language}
     }
 
     tagName = 'div'
-    attributes = Neos.Fusion:Attributes {
+    attributes {
         id = 'outdated'
         data-lowerthan = Neos.Fusion:Case {
             ie8 {
-                condition = ${settings.lowerThan == 'IE8'}
+                condition = ${configuration.lowerThan == 'IE8'}
                 renderer ='borderSpacing'
             }
             ie9 {
-                condition = ${settings.lowerThan == 'IE9'}
+                condition = ${configuration.lowerThan == 'IE9'}
                 renderer ='boxShadow'
             }
             ie10 {
-                condition = ${settings.lowerThan == 'IE10'}
+                condition = ${configuration.lowerThan == 'IE10'}
                 renderer ='transform'
             }
             ie11 {
-                condition = ${settings.lowerThan == 'IE11'}
+                condition = ${configuration.lowerThan == 'IE11'}
                 renderer ='borderImage'
             }
             edge {
-                condition = ${settings.lowerThan == 'Edge'}
+                condition = ${configuration.lowerThan == 'Edge'}
                 renderer ='js:Promise'
             }
             flexbox {
-                condition = ${settings.lowerThan == 'Flexbox'}
+                condition = ${configuration.lowerThan == 'Flexbox'}
                 renderer ='flex-wrap'
             }
             oldGrid {
-                condition = ${settings.lowerThan == 'oldGrid'}
+                condition = ${configuration.lowerThan == 'oldGrid'}
                 renderer ='grid-row'
             }
             grid {
-                condition = ${settings.lowerThan == 'Grid'}
+                condition = ${configuration.lowerThan == 'Grid'}
                 renderer ='grid-auto-flow'
             }
             a23 {
-                condition = ${settings.lowerThan == 'A23'}
+                condition = ${configuration.lowerThan == 'A23'}
                 renderer ='writing-mode'
             }
             cssProperty {
                 condition = true
-                renderer = ${settings.lowerThan}
+                renderer = ${configuration.lowerThan}
             }
         }
     }
 
     content = Neos.Fusion:Array {
-        CSS = Dotpulse.OutdatedBrowser:CSS
+        CSS = Dotpulse.OutdatedBrowser:CSS {
+            @if.include = ${Configuration.setting('Dotpulse.OutdatedBrowser.css.include')}
+        }
         Markup = Neos.Fusion:Template {
             templatePath = ${'resource://Dotpulse.OutdatedBrowser/Private/Templates/' + language + '.html'}
             // Change target
-            @process.target = ${settings.target ? String.replace(value, 'id="btnUpdateBrowser"', 'id="btnUpdateBrowser" rel="noopener" target="' + settings.target + '"') : value}
+            @process.target = ${configuration.target ? String.replace(value, 'id="btnUpdateBrowser"', 'id="btnUpdateBrowser" rel="noopener" target="' + configuration.target + '"') : value}
         }
-        Javascript = Dotpulse.OutdatedBrowser:Javascript
+        Javascript = Dotpulse.OutdatedBrowser:Javascript {
+            @if.include = ${Configuration.setting('Dotpulse.OutdatedBrowser.javascript.include')}
+        }
     }
-
-    @if.include = ${settings.includeHTML}
 }

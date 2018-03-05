@@ -1,11 +1,39 @@
-prototype(Dotpulse.OutdatedBrowser:Javascript) <  prototype(Neos.Fusion:Tag) {
-    include = ${Configuration.setting('Dotpulse.OutdatedBrowser.includeJavascript')}
-    tagName = 'script'
-    attributes {
-        src = Neos.Fusion:ResourceUri {
-            path = 'resource://Dotpulse.OutdatedBrowser/Public/Main.js'
-        }
-        async = true
+prototype(Dotpulse.OutdatedBrowser:Javascript) <  prototype(Neos.Fusion:Case) {
+    configuration = ${Configuration.setting('Dotpulse.OutdatedBrowser.javascript')}
+    path = 'resource://Dotpulse.OutdatedBrowser/Public/Main.js'
+
+    @context {
+        configuration = ${this.configuration}
+        path = ${this.path}
     }
-    @if.include = ${this.include}
+
+    @ignoreProperties = ${['configuration','path']}
+
+    inline {
+        condition = ${configuration.inline}
+        renderer = Neos.Fusion:Tag {
+            tagName = 'script'
+            content = Carbon.FileContent:FileContent {
+                path = ${path}
+            }
+        }
+    }
+    external {
+        condition = true
+        renderer = Neos.Fusion:Tag {
+            tagName = 'script'
+            attributes {
+                src = Neos.Fusion:Array {
+                    path= Neos.Fusion:ResourceUri {
+                        path = ${path}
+                    }
+                    arg = '?h='
+                    hash = Carbon.FileContent:HashOfFile {
+                        path = ${path}
+                    }
+                }
+                async = true
+            }
+        }
+    }
 }
