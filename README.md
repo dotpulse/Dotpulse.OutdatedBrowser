@@ -9,7 +9,7 @@ This package includes [Outdated Browser](http://outdatedbrowser.com/) into [Neos
 | Version | Neos   |
 |---------|--------|
 | 0.2.*   | 2.*    |
-| 1.*     | 3.*    |
+| 2.*     | 3.*    |
 
 ![Screenshot ot outdatedbrowser.com](https://user-images.githubusercontent.com/4510166/36903094-e575156a-1e2c-11e8-8cd1-acc375c451a7.png)
 
