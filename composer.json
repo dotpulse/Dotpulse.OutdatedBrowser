@@ -17,8 +17,8 @@
         }
     ],
     "require": {
-        "neos/neos": "3.*",
-        "carbon/filecontent": "*"
+        "neos/neos": "~3.0 || ~4.0",
+        "carbon/filecontent": "^1.1.0"
     },
     "autoload": {
         "psr-0": {
@@ -105,7 +105,10 @@
             "Neos.Fusion-20170120013047",
             "Neos.Flow-20170125103800",
             "Neos.Seo-20170127154600",
-            "Neos.Flow-20170127183102"
+            "Neos.Flow-20170127183102",
+            "Neos.Fusion-20180211175500",
+            "Neos.Fusion-20180211184832",
+            "Neos.Flow-20180415105700"
         ]
     }
 }
