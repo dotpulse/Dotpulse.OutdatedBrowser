@@ -1,5 +1,4 @@
 prototype(Dotpulse.OutdatedBrowser:Markup) <  prototype(Neos.Fusion:Tag) {
-    configuration = ${Configuration.setting('Dotpulse.OutdatedBrowser')}
     language = Neos.Fusion:Case {
         @context {
             availableLanguages = ${['cs','da','de','el','en','es-pe','es','et','fa','fi','fr','hr','hu','id','it','ja','ko','lt','nb','nl','pl','pt-br','pt','ro','ru','sk','sl','sv','tr','uk','zh-cn','zh-tw']}
@@ -13,8 +12,8 @@ prototype(Dotpulse.OutdatedBrowser:Markup) <  prototype(Neos.Fusion:Tag) {
                     renderer = ${String.crop(Configuration.setting('Neos.Flow.i18n.defaultLocale'), 2)}
                 }
                 fallbackLanguage {
-                    condition = ${configuration.fallbackLanguage}
-                    renderer = ${configuration.fallbackLanguage}
+                    condition = ${Configuration.setting('Dotpulse.OutdatedBrowser.fallbackLanguage')}
+                    renderer = ${Configuration.setting('Dotpulse.OutdatedBrowser.fallbackLanguage')}
                 }
                 default {
                     condition = true
@@ -23,8 +22,8 @@ prototype(Dotpulse.OutdatedBrowser:Markup) <  prototype(Neos.Fusion:Tag) {
             }
             fallbackLanguage = Neos.Fusion:Case {
                 fallbackLanguage {
-                    condition = ${configuration.fallbackLanguage}
-                    renderer = ${configuration.fallbackLanguage}
+                    condition = ${Configuration.setting('Dotpulse.OutdatedBrowser.fallbackLanguage')}
+                    renderer = ${Configuration.setting('Dotpulse.OutdatedBrowser.fallbackLanguage')}
                 }
                 default {
                     condition = true
@@ -45,6 +44,8 @@ prototype(Dotpulse.OutdatedBrowser:Markup) <  prototype(Neos.Fusion:Tag) {
             renderer = 'en'
         }
     }
+    lowerThan = ${Configuration.setting('Dotpulse.OutdatedBrowser.lowerThan')}
+    target = ${Configuration.setting('Dotpulse.OutdatedBrowser.target')}
 
     @context.props = ${this}
 
@@ -53,44 +54,44 @@ prototype(Dotpulse.OutdatedBrowser:Markup) <  prototype(Neos.Fusion:Tag) {
         id = 'outdated'
         data-lowerthan = Neos.Fusion:Case {
             ie8 {
-                condition = ${props.configuration.lowerThan == 'IE8'}
+                condition = ${props.lowerThan == 'IE8'}
                 renderer ='borderSpacing'
             }
             ie9 {
-                condition = ${props.configuration.lowerThan == 'IE9'}
+                condition = ${props.lowerThan == 'IE9'}
                 renderer ='boxShadow'
             }
             ie10 {
-                condition = ${props.configuration.lowerThan == 'IE10'}
+                condition = ${props.lowerThan == 'IE10'}
                 renderer ='transform'
             }
             ie11 {
-                condition = ${props.configuration.lowerThan == 'IE11'}
+                condition = ${props.lowerThan == 'IE11'}
                 renderer ='borderImage'
             }
             edge {
-                condition = ${props.configuration.lowerThan == 'Edge'}
+                condition = ${props.lowerThan == 'Edge'}
                 renderer ='js:Promise'
             }
             flexbox {
-                condition = ${props.configuration.lowerThan == 'Flexbox'}
+                condition = ${props.lowerThan == 'Flexbox'}
                 renderer ='flex-wrap'
             }
             oldGrid {
-                condition = ${props.configuration.lowerThan == 'oldGrid'}
+                condition = ${props.lowerThan == 'oldGrid'}
                 renderer ='grid-row'
             }
             grid {
-                condition = ${props.configuration.lowerThan == 'Grid'}
+                condition = ${props.lowerThan == 'Grid'}
                 renderer ='grid-auto-flow'
             }
             a23 {
-                condition = ${props.configuration.lowerThan == 'A23'}
+                condition = ${props.lowerThan == 'A23'}
                 renderer ='writing-mode'
             }
             cssProperty {
                 condition = true
-                renderer = ${props.configuration.lowerThan}
+                renderer = ${props.lowerThan}
             }
         }
     }
@@ -102,7 +103,7 @@ prototype(Dotpulse.OutdatedBrowser:Markup) <  prototype(Neos.Fusion:Tag) {
         Markup = Neos.Fusion:Template {
             templatePath = ${'resource://Dotpulse.OutdatedBrowser/Private/Templates/' + props.language + '.html'}
             // Change target
-            @process.target = ${props.configuration.target ? String.replace(value, 'id="btnUpdateBrowser"', 'id="btnUpdateBrowser" rel="noopener" target="' + props.configuration.target + '"') : value}
+            @process.target = ${props.target ? String.replace(value, 'id="btnUpdateBrowser"', 'id="btnUpdateBrowser" rel="noopener" target="' + props.target + '"') : value}
         }
         Javascript = Dotpulse.OutdatedBrowser:Javascript {
             @if.include = ${Configuration.setting('Dotpulse.OutdatedBrowser.javascript.include')}
