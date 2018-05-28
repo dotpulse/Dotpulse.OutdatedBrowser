@@ -26,7 +26,14 @@
         }
     },
     "archive": {
-        "exclude": [".editorconfig", ".gitignore", ".github", ".gitattributes", "package.json"]
+        "exclude": [
+            ".editorconfig",
+            ".gitignore",
+            ".github",
+            ".gitattributes",
+            "package.json",
+            "Banner.js"
+        ]
     },
     "extra": {
         "marketplace-account": "neos@dotpulse.ch",
