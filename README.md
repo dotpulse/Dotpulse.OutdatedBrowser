@@ -9,7 +9,7 @@ This package includes [Outdated Browser](http://outdatedbrowser.com/) into [Neos
 | Version | Neos        |
 | ------- | ----------- |
 | 0.2.\*  | 2.\*        |
-| > 2.1   | 3.\* + 4.\* |
+| > 2.2   | 3.\* + 4.\* |
 
 ![Screenshot ot outdatedbrowser.com](https://user-images.githubusercontent.com/4510166/36903094-e575156a-1e2c-11e8-8cd1-acc375c451a7.png)
 
@@ -24,7 +24,7 @@ composer require dotpulse/outdatedbrowser --no-update
 To install the package under Neos 2.\* you have to enter
 
 ```bash
-composer require "dotpulse/outdatedbrowser:^0.2" --no-update
+composer require "dotpulse/outdatedbrowser:~0.2" --no-update
 ```
 
 The `--no-update` command prevent the automatic update of the dependencies. After the package was added to your theme `composer.json`, go back to the root of the Neos installation and run `composer update`. Et voilà! Your desired package is now installed correctly.
