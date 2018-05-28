@@ -13,13 +13,13 @@
     "uglify-js": "latest"
   },
   "scripts": {
-    "build:rawjs":
-      "cp Resources/Private/Javascripts/OutdatedBrowser.js Resources/Public/Main.js",
-    "build:js":
-      "uglifyjs Resources/Private/Javascripts/OutdatedBrowser.js --mangle --compress --output Resources/Public/Main.js",
+    "build:js:cookie":
+      "uglifyjs Resources/Private/Javascripts/Cookie.js --mangle --compress --output Resources/Public/Cookie.js",
+    "build:js:storage":
+      "uglifyjs Resources/Private/Javascripts/Storage.js --mangle --compress --output Resources/Public/Storage.js",
     "build:css":
       "node-sass Resources/Private/Styles/OutdatedBrowser.scss Resources/Public/Main.css && cssnano Resources/Public/Main.css Resources/Public/Main.css --autoprefixer.add true --autoprefixer.browsers: '> 1%' --no-zindex --discardComments.removeAll true",
-    "build": "npm run build:css && npm run build:js",
-    "start": "npm run build"
+    "build": "yarn build:css && yarn build:js:cookie && yarn build:js:storage",
+    "start": "yarn build"
   }
 }

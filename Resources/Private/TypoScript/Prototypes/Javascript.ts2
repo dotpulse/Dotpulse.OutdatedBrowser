@@ -1,6 +1,6 @@
 prototype(Dotpulse.OutdatedBrowser:Javascript) <  prototype(TYPO3.TypoScript:Case) {
     configuration = ${Configuration.setting('Dotpulse.OutdatedBrowser.javascript')}
-    path = 'resource://Dotpulse.OutdatedBrowser/Public/Main.js'
+    path = ${'resource://Dotpulse.OutdatedBrowser/Public/' + this.configuration.implementation + '.js'}
 
     @context.props = ${this}
     @ignoreProperties = ${['configuration','path']}
