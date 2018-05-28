@@ -1,7 +1,6 @@
 {
     "name": "dotpulse/outdatedbrowser",
     "type": "typo3-flow-plugin",
-    "version": "0.2.0",
     "license": "MIT",
     "description": "Outdated Browser for Neos CMS",
     "foundation": {
@@ -18,7 +17,8 @@
         }
     ],
     "require": {
-        "typo3/neos": "2.*"
+        "typo3/neos": "2.*",
+        "carbon/filecontent": "^0.5"
     },
     "autoload": {
         "psr-0": {
@@ -26,7 +26,14 @@
         }
     },
     "archive": {
-        "exclude": [".editorconfig", ".gitignore", ".github", ".gitattributes", "package.json", "Banner.js"]
+        "exclude": [
+            ".editorconfig",
+            ".gitignore",
+            ".github",
+            ".gitattributes",
+            "package.json",
+            "Banner.js"
+        ]
     },
     "extra": {
         "marketplace-account": "neos@dotpulse.ch",

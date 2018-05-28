@@ -1,11 +1,35 @@
-prototype(Dotpulse.OutdatedBrowser:Javascript) <  prototype(TYPO3.TypoScript:Tag) {
-    include = ${Configuration.setting('Dotpulse.OutdatedBrowser.includeJavascript')}
-    tagName = 'script'
-    attributes {
-        src = TYPO3.TypoScript:ResourceUri {
-            path = 'resource://Dotpulse.OutdatedBrowser/Public/Main.js'
+prototype(Dotpulse.OutdatedBrowser:Javascript) <  prototype(TYPO3.TypoScript:Case) {
+    configuration = ${Configuration.setting('Dotpulse.OutdatedBrowser.javascript')}
+    path = 'resource://Dotpulse.OutdatedBrowser/Public/Main.js'
+
+    @context.props = ${this}
+    @ignoreProperties = ${['configuration','path']}
+
+    inline {
+        condition = ${props.configuration.inline}
+        renderer = TYPO3.TypoScript:Tag {
+            tagName = 'script'
+            content = Carbon.FileContent:FileContent {
+                path = ${props.path}
+            }
         }
-        async = true
     }
-    @if.include = ${this.include}
+    external {
+        condition = true
+        renderer = TYPO3.TypoScript:Tag {
+            tagName = 'script'
+            attributes {
+                src = TYPO3.TypoScript:Array {
+                    path= TYPO3.TypoScript:ResourceUri {
+                        path = ${props.path}
+                    }
+                    arg = '?h='
+                    hash = Carbon.FileContent:HashOfFile {
+                        path = ${props.path}
+                    }
+                }
+                defer = true
+            }
+        }
+    }
 }
