@@ -1,15 +1,18 @@
-// Based on https://github.com/burocratik/outdated-browser
-
 (function() {
     var outdated = document.getElementById("outdated");
     if (outdated) {
         var data = outdated.getAttribute("data-lowerthan");
         var cssProp = data ? data : "transform";
         var validBrowser = false;
-        var storage = {
-            name: "outdatedbrowser",
-            value: "hide"
-        };
+        var hasCookie = false;
+        if (navigator.cookieEnabled) {
+            hasCookie = (function() {
+                var v = document.cookie.match(
+                    "(^|;) ?outdatedbrowser=([^;]*)(;|$)"
+                );
+                return v ? v[2] == "true" : null;
+            })();
+        }
 
         function removeElement() {
             outdated.parentElement.removeChild(outdated);
@@ -17,12 +20,14 @@
 
         function hide() {
             removeElement();
-            localStorage.setItem(storage.name, storage.value);
+            if (navigator.cookieEnabled) {
+                document.cookie = "outdatedbrowser=true;path=/;";
+            }
             return false;
         }
 
         function checkCssProp() {
-            if (localStorage.getItem(storage.name) == storage.value) {
+            if (hasCookie) {
                 removeElement();
             } else {
                 var supports = (function() {
@@ -76,7 +81,6 @@
                 }
             }
         }
-
         checkCssProp();
     }
 })();

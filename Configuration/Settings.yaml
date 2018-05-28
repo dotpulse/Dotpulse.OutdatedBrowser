@@ -4,10 +4,11 @@ Neos:
       autoInclude:
         'Dotpulse.OutdatedBrowser': true
 
-
 Dotpulse:
   OutdatedBrowser:
     javascript:
+      # Set to `Storage` or `Cookie`
+      implementation: Storage
       include: true
       inline: true
     css:
