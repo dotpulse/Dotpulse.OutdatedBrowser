@@ -15,12 +15,12 @@
 
         function hide() {
             removeElement();
-            localStorage.setItem(storage.name, storage.value);
+            sessionStorage.setItem(storage.name, storage.value);
             return false;
         }
 
         function checkCssProp() {
-            if (localStorage.getItem(storage.name) == storage.value) {
+            if (sessionStorage.getItem(storage.name) == storage.value) {
                 removeElement();
             } else {
                 var supports = (function() {
