@@ -1,20 +1,21 @@
 prototype(Dotpulse.OutdatedBrowser:CSS) <  prototype(Neos.Fusion:Case) {
-    configuration = ${Configuration.setting('Dotpulse.OutdatedBrowser.css')}
+    inline = ${Configuration.setting('Dotpulse.OutdatedBrowser.css.inline')}
     path = 'resource://Dotpulse.OutdatedBrowser/Public/Main.css'
 
-    @context.props = ${this}
-    @ignoreProperties = ${['configuration','path']}
+    @context {
+        inline = ${this.inline}
+        path = ${this.path}
+    }
+    @ignoreProperties = ${['inline','path']}
 
-    inline {
-        condition = ${props.configuration.inline}
+    inlineFile {
+        condition = ${inline ? true : false}
         renderer = Neos.Fusion:Tag {
             tagName = 'style'
-            content = Carbon.FileContent:FileContent {
-                path = ${props.path}
-            }
+            content = ${Carbon.FileContent.path(path)}
         }
     }
-    external {
+    externalFile {
         condition = true
         renderer = Neos.Fusion:Tag {
             tagName = 'link'
@@ -22,12 +23,10 @@ prototype(Dotpulse.OutdatedBrowser:CSS) <  prototype(Neos.Fusion:Case) {
                 rel = 'stylesheet'
                 href = Neos.Fusion:Array {
                     path= Neos.Fusion:ResourceUri {
-                        path = ${props.path}
+                        path = ${path}
                     }
                     arg = '?h='
-                    hash = Carbon.FileContent:HashOfFile {
-                        path = ${props.path}
-                    }
+                    hash = ${Carbon.FileContent.pathHash(path)}
                 }
             }
 

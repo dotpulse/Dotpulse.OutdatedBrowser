@@ -1,32 +1,31 @@
 prototype(Dotpulse.OutdatedBrowser:Javascript) <  prototype(Neos.Fusion:Case) {
-    configuration = ${Configuration.setting('Dotpulse.OutdatedBrowser.javascript')}
-    path = ${'resource://Dotpulse.OutdatedBrowser/Public/' + this.configuration.implementation + '.js'}
+    inline = ${Configuration.setting('Dotpulse.OutdatedBrowser.javascript.inline')}
+    path = ${'resource://Dotpulse.OutdatedBrowser/Public/' + Configuration.setting('Dotpulse.OutdatedBrowser.javascript.implementation') + '.js'}
 
-    @context.props = ${this}
-    @ignoreProperties = ${['configuration','path']}
+    @context {
+        inline = ${this.inline}
+        path = ${this.path}
+    }
+    @ignoreProperties = ${['inline','path']}
 
-    inline {
-        condition = ${props.configuration.inline}
+    inlineFile {
+        condition = ${inline ? true : false}
         renderer = Neos.Fusion:Tag {
             tagName = 'script'
-            content = Carbon.FileContent:FileContent {
-                path = ${props.path}
-            }
+            content = ${Carbon.FileContent.path(path)}
         }
     }
-    external {
+    externalFile {
         condition = true
         renderer = Neos.Fusion:Tag {
             tagName = 'script'
             attributes {
                 src = Neos.Fusion:Array {
                     path= Neos.Fusion:ResourceUri {
-                        path = ${props.path}
+                        path = ${path}
                     }
                     arg = '?h='
-                    hash = Carbon.FileContent:HashOfFile {
-                        path = ${props.path}
-                    }
+                    hash = ${Carbon.FileContent.pathHash(path)}
                 }
                 defer = true
             }
