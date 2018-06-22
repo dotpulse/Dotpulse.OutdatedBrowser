@@ -18,7 +18,7 @@
     ],
     "require": {
         "typo3/neos": "2.*",
-        "carbon/filecontent": "^0.5"
+        "carbon/eel": "^0.5"
     },
     "autoload": {
         "psr-0": {
