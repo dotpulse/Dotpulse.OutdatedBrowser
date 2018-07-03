@@ -47,51 +47,55 @@ prototype(Dotpulse.OutdatedBrowser:Markup) <  prototype(Neos.Fusion:Tag) {
     lowerThan = ${Configuration.setting('Dotpulse.OutdatedBrowser.lowerThan')}
     target = ${Configuration.setting('Dotpulse.OutdatedBrowser.target')}
 
-    @context.props = ${this}
+    @context {
+        lowerThan = ${this.lowerThan}
+        target = ${this.target}
+        language = ${this.language}
+    }
 
     tagName = 'div'
     attributes {
         id = 'outdated'
         data-lowerthan = Neos.Fusion:Case {
             ie8 {
-                condition = ${props.lowerThan == 'IE8'}
+                condition = ${lowerThan == 'IE8'}
                 renderer ='borderSpacing'
             }
             ie9 {
-                condition = ${props.lowerThan == 'IE9'}
+                condition = ${lowerThan == 'IE9'}
                 renderer ='boxShadow'
             }
             ie10 {
-                condition = ${props.lowerThan == 'IE10'}
+                condition = ${lowerThan == 'IE10'}
                 renderer ='transform'
             }
             ie11 {
-                condition = ${props.lowerThan == 'IE11'}
+                condition = ${lowerThan == 'IE11'}
                 renderer ='borderImage'
             }
             edge {
-                condition = ${props.lowerThan == 'Edge'}
+                condition = ${lowerThan == 'Edge'}
                 renderer ='js:Promise'
             }
             flexbox {
-                condition = ${props.lowerThan == 'Flexbox'}
+                condition = ${lowerThan == 'Flexbox'}
                 renderer ='flex-wrap'
             }
             oldGrid {
-                condition = ${props.lowerThan == 'oldGrid'}
+                condition = ${lowerThan == 'oldGrid'}
                 renderer ='grid-row'
             }
             grid {
-                condition = ${props.lowerThan == 'Grid'}
+                condition = ${lowerThan == 'Grid'}
                 renderer ='grid-auto-flow'
             }
             a23 {
-                condition = ${props.lowerThan == 'A23'}
+                condition = ${lowerThan == 'A23'}
                 renderer ='writing-mode'
             }
             cssProperty {
                 condition = true
-                renderer = ${props.lowerThan}
+                renderer = ${lowerThan}
             }
         }
     }
@@ -101,9 +105,9 @@ prototype(Dotpulse.OutdatedBrowser:Markup) <  prototype(Neos.Fusion:Tag) {
             @if.include = ${Configuration.setting('Dotpulse.OutdatedBrowser.css.include')}
         }
         Markup = Neos.Fusion:Template {
-            templatePath = ${'resource://Dotpulse.OutdatedBrowser/Private/Templates/' + props.language + '.html'}
+            templatePath = ${'resource://Dotpulse.OutdatedBrowser/Private/Templates/' + language + '.html'}
             // Change target
-            @process.target = ${props.target ? String.replace(value, 'id="btnUpdateBrowser"', 'id="btnUpdateBrowser" rel="noopener" target="' + props.target + '"') : value}
+            @process.target = ${target ? String.replace(value, 'id="btnUpdateBrowser"', 'id="btnUpdateBrowser" rel="noopener" target="' + target + '"') : value}
         }
         Javascript = Dotpulse.OutdatedBrowser:Javascript {
             @if.include = ${Configuration.setting('Dotpulse.OutdatedBrowser.javascript.include')}
