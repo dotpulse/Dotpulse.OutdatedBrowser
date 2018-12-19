@@ -18,5 +18,5 @@ Dotpulse:
     # Browser based: A23, IE8, IE9, IE10, IE11 or Edge
     # Feature based: Flexbox, oldGrid or Grid
     # Property based: Any CSS property
-    lowerThan: IE11
+    lowerThan: Edge
     target: _blank
