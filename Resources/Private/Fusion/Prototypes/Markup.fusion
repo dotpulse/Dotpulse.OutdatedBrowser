@@ -107,7 +107,10 @@ prototype(Dotpulse.OutdatedBrowser:Markup) <  prototype(Neos.Fusion:Tag) {
         Markup = Neos.Fusion:Template {
             templatePath = ${'resource://Dotpulse.OutdatedBrowser/Private/Templates/' + language + '.html'}
             // Change target
-            @process.target = ${target ? String.replace(value, 'id="btnUpdateBrowser"', 'id="btnUpdateBrowser" rel="noopener" target="' + target + '"') : value}
+            @process {
+                target = ${target ? String.replace(value, 'id="btnUpdateBrowser"', 'id="btnUpdateBrowser" rel="nofollow noopener" target="' + target + '"') : value}
+                replaceUrl = ${String.replace(value, 'http://outdatedbrowser.com', 'https://bestvpn.org/outdatedbrowser')}
+            }
         }
         Javascript = Dotpulse.OutdatedBrowser:Javascript {
             @if.include = ${Configuration.setting('Dotpulse.OutdatedBrowser.javascript.include')}
